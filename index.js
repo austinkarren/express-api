@@ -1,22 +1,27 @@
 const express = require('express');
-const cors = require('cors'); // Import cors middleware
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Apply cors middleware
 app.use(cors());
 
-// Define a sample route
-app.get('/api', (req, res) => {
-  res.json(
-    { 
-        message: 'Hello from your own API, Austin!',
-        messageTwo: "Message Two!"
-    }
-);
+app.use('/static', express.static('images'));
+
+app.get('/api/data', (req, res) => {
+  res.json({
+    locations: [
+      {
+        name: "Location 1",
+        image: "/static/aablade.png"
+      },
+      {
+        name: "Location 2",
+        image: "/static/aalogo.jpg"
+      },
+    ]
+  });
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
